@@ -1,0 +1,125 @@
+openapi: 3.0.3
+info:
+  version: "1.0.0"
+  title: API ESTUDIANTE
+tags:
+  - name: ESTUDIANTE
+paths:
+  /estudiantes:
+    get:
+      tags:
+        - ESTUDIANTE
+      operationId: listEstudiantes
+      responses:
+        '200':
+          description: Búsqueda Exitosa.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EstudiantesResponseDto'
+        '503':
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionDto'
+  /estudiantes/estudiante:
+    post:
+      tags:
+        - ESTUDIANTE
+      operationId: addEstudiantes
+      requestBody:
+        description: Entrada del Servicio.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstudianteDto'
+      responses:
+        '204':
+          description: Transaccion Exitosa.
+        '503':
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionDto'
+    put:
+      tags:
+        - ESTUDIANTE
+      operationId: updateEstudiantes
+      requestBody:
+        description: Entrada del Servicio.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstudianteDto'
+      responses:
+        '204':
+          description: Transaccion Exitosa.
+        '503':
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionDto'
+    delete:
+      tags:
+        - ESTUDIANTE
+      operationId: deleteEstudiantes
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '204':
+          description: Transaccion Exitosa.
+        '503':
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionDto'
+components:
+  parameters:
+    Id:
+      name: id
+      in: query
+      required: true
+      schema:
+        type: integer
+  schemas:
+    EstudiantesResponseDto:
+      title: EstudiantesResponseDto
+      type: object
+      required:
+        - estudiantes
+      properties:
+        estudiantes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EstudianteDto'
+    EstudianteDto:
+      type: object
+      properties:
+        id:
+          type: integer
+        nombre:
+          type: string
+        apellido:
+          type: string
+        email:
+          type: string
+        creditos:
+          type: integer
+        semestre:
+          type: integer
+        promedio:
+          type: integer
+    ExceptionDto:
+      title: Exception
+      type: object
+      properties:
+        code:
+          type: string
+          description: Codigo de error de Sistema
+        description:
+          type: string
+          description: Descripcion del error de Sistema
