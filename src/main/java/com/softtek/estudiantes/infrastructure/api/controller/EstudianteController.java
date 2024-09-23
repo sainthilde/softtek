@@ -2,7 +2,7 @@ package com.softtek.estudiantes.infrastructure.api.controller;
 
 import com.softtek.estudiantes.application.service.EstudianteService;
 import com.softtek.estudiantes.infrastructure.api.mapper.MapperUtil;
-import com.softtek.estudiantes.openapi.api.EstudiantesApiDelegate;
+import com.softtek.estudiantes.openapi.api.EstudiantesApi;
 import com.softtek.estudiantes.openapi.model.EstudianteDto;
 import com.softtek.estudiantes.openapi.model.EstudiantesResponseDto;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
-public class EstudianteController implements EstudiantesApiDelegate {
+public class EstudianteController implements EstudiantesApi {
 
     private final EstudianteService service;
 
